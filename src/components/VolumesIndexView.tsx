@@ -106,7 +106,7 @@ export const VolumesIndexView: React.FC<VolumesIndexViewProps> = ({
                         {vol.chapters.length} ابواب
                       </span>
                     </div>
-                    <p className="text-xs text-[#44403C] dark:text-[#C8C0B4] leading-6 line-clamp-2">
+                    <p className="text-xs text-[#44403C] dark:text-[#C8C0B4] leading-6">
                       {vol.scopeSummary}
                     </p>
                   </div>

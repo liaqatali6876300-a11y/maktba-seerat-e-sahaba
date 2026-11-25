@@ -149,11 +149,11 @@ export const LibraryHome: React.FC<LibraryHomeProps> = ({
                         <span className="truncate">{book.author}</span>
                       </div>
 
-                      <h3 className="font-nastaliq text-lg font-bold text-[#1C1917] dark:text-[#F5F0E6] leading-[1.8] truncate">
+                      <h3 className="font-nastaliq text-lg font-bold text-[#1C1917] dark:text-[#F5F0E6] leading-[1.8]">
                         {book.title}
                       </h3>
 
-                      <p className="text-xs text-[#57534E] dark:text-[#B8B0A2] leading-5 line-clamp-2">
+                      <p className="text-xs text-[#57534E] dark:text-[#B8B0A2] leading-6">
                         {book.description}
                       </p>
                     </div>

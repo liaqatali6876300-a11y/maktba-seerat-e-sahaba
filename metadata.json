@@ -1,0 +1,8 @@
+{
+  "name": "مکتبہ سیرت و طبقات — 31 جلدیں",
+  "description": "پانچ عظیم محدثین و مؤرخین (ابن حجر، ابن اثیر، ابن سعد، ابن ہشام، ابن عبد البر) کی 31 مکمل جلدوں پر مشتمل آف لائن کتب خانہ",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

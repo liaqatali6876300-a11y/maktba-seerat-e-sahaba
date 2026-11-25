@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, BookOpen, ScrollText } from 'lucide-react';
+import { ArrowRight, BookOpen, ScrollText, ChevronLeft } from 'lucide-react';
 import type { Book, ReadingProgress } from '../types/library';
 import { BookCoverImage } from './BookCoverImage';
 
@@ -22,22 +22,20 @@ export const BookDetailView: React.FC<BookDetailViewProps> = ({
   const resumeChap = resumeVol?.chapters.find((c) => c.id === progress?.chapterId);
 
   return (
-    <div className="space-y-10">
-      <div>
-        <button
-          type="button"
-          onClick={onBack}
-          className="inline-flex items-center gap-2 text-sm text-[#57534E] dark:text-[#B8B0A2] hover:text-[#1C1917] dark:hover:text-[#F5F0E6] min-h-[44px] cursor-pointer"
-        >
-          <ArrowRight className="w-4 h-4" aria-hidden="true" />
-          <span>واپس کتب خانہ</span>
-        </button>
-      </div>
+    <div className="space-y-6">
+      <button
+        type="button"
+        onClick={onBack}
+        className="inline-flex items-center gap-1.5 text-xs font-medium text-[#57534E] dark:text-[#B8B0A2] hover:text-[#1C1917] dark:hover:text-[#F5F0E6] min-h-[44px] cursor-pointer"
+      >
+        <ArrowRight className="w-4 h-4" aria-hidden="true" />
+        <span>واپس کتب خانہ</span>
+      </button>
 
-      {/* Book Header Split */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch border-b border-[#E0D9CA] dark:border-[#2C2820] pb-10">
-        <div className="lg:col-span-4">
-          <div className="aspect-[3/4] w-full max-w-sm mx-auto rounded-2xl overflow-hidden border border-[#D6CEBE] dark:border-[#332E24]">
+      {/* Mobile Book Header Card */}
+      <section className="rounded-2xl bg-white dark:bg-[#1C1A16] border border-[#E2DACB] dark:border-[#2E2A22] p-4 space-y-4">
+        <div className="flex gap-4 items-start">
+          <div className="w-24 aspect-[3/4] shrink-0 rounded-xl overflow-hidden border border-[#D6CEBE] dark:border-[#332E24]">
             <BookCoverImage
               src={book.coverImage}
               alt={book.title}
@@ -47,102 +45,100 @@ export const BookDetailView: React.FC<BookDetailViewProps> = ({
               className="w-full h-full"
             />
           </div>
-        </div>
 
-        <div className="lg:col-span-8 flex flex-col justify-between space-y-6">
-          <div className="space-y-4">
-            <div className="flex flex-wrap items-center gap-2 text-xs text-[#78716C] dark:text-[#9E9689]">
-              <span className="font-arabic text-sm text-[#7A5B2B] dark:text-[#C59B43]">
-                {book.arabicTitle}
-              </span>
-              <span aria-hidden="true">·</span>
-              <span>{book.authorEra}</span>
-              <span aria-hidden="true">·</span>
-              <span className="tabular-nums">{book.volumeCount} مکمل جلدیں</span>
-            </div>
-
-            <h1 className="font-nastaliq text-3xl sm:text-4xl font-bold text-[#1C1917] dark:text-[#F5F0E6] leading-[1.85]">
-              {book.fullTitle}
+          <div className="flex-1 min-w-0 space-y-1.5">
+            <p className="font-arabic text-xs text-[#7A5B2B] dark:text-[#C59B43] truncate">
+              {book.arabicTitle}
+            </p>
+            <h1 className="font-nastaliq text-xl font-bold text-[#1C1917] dark:text-[#F5F0E6] leading-[1.8]">
+              {book.title}
             </h1>
-
-            <p className="text-base font-medium text-[#143D2B] dark:text-[#C59B43]">
-              مصنف: {book.authorFullName}
+            <p className="text-xs font-medium text-[#143D2B] dark:text-[#C59B43]">
+              {book.authorFullName}
             </p>
-
-            <p className="text-base text-[#44403C] dark:text-[#C8C0B4] leading-8">
-              {book.description}
+            <p className="text-[11px] text-[#78716C] dark:text-[#9E9689] tabular-nums">
+              {book.authorEra} · {book.volumeCount} مکمل جلدیں
             </p>
-
-            <div className="rounded-xl bg-[#EFEAE0] dark:bg-[#1C1A16] border border-[#DFD8C8] dark:border-[#2E2A22] p-5 space-y-2">
-              <div className="flex items-center gap-2 text-xs font-semibold text-[#7A5B2B] dark:text-[#C59B43]">
-                <ScrollText className="w-4 h-4" aria-hidden="true" />
-                <span>منہجِ تالیف و علمی خصوصیات</span>
-              </div>
-              <p className="text-sm text-[#44403C] dark:text-[#B8B0A2] leading-7">
-                {book.methodology}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3 pt-2">
-            {resumeVol && resumeChap ? (
-              <button
-                type="button"
-                onClick={() => onOpenReader(book.id, resumeVol.id, resumeChap.id)}
-                className="inline-flex items-center gap-2 px-5 py-3 min-h-[44px] rounded-xl bg-[#143D2B] text-[#F8F5EE] hover:bg-[#1B5139] dark:bg-[#C59B43] dark:text-[#12110E] text-sm font-medium transition-colors cursor-pointer"
-              >
-                <BookOpen className="w-4 h-4" aria-hidden="true" />
-                <span>مطالعہ جاری رکھیں: {resumeVol.volumeTitle} — {resumeChap.title}</span>
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() =>
-                  onOpenReader(
-                    book.id,
-                    book.volumes[0].id,
-                    book.volumes[0].chapters[0].id
-                  )
-                }
-                className="inline-flex items-center gap-2 px-5 py-3 min-h-[44px] rounded-xl bg-[#143D2B] text-[#F8F5EE] hover:bg-[#1B5139] dark:bg-[#C59B43] dark:text-[#12110E] text-sm font-medium transition-colors cursor-pointer"
-              >
-                <BookOpen className="w-4 h-4" aria-hidden="true" />
-                <span>جلد اول سے مطالعہ شروع کریں</span>
-              </button>
-            )}
           </div>
         </div>
+
+        <p className="text-xs text-[#44403C] dark:text-[#C8C0B4] leading-6">
+          {book.description}
+        </p>
+
+        <div className="rounded-xl bg-[#F8F5EE] dark:bg-[#24211C] p-3.5 space-y-1.5">
+          <div className="flex items-center gap-1.5 text-[11px] font-semibold text-[#7A5B2B] dark:text-[#C59B43]">
+            <ScrollText className="w-3.5 h-3.5" aria-hidden="true" />
+            <span>منہجِ تالیف</span>
+          </div>
+          <p className="text-xs text-[#57534E] dark:text-[#B8B0A2] leading-6">
+            {book.methodology}
+          </p>
+        </div>
+
+        {resumeVol && resumeChap ? (
+          <button
+            type="button"
+            onClick={() => onOpenReader(book.id, resumeVol.id, resumeChap.id)}
+            className="w-full flex items-center justify-center gap-2 px-4 min-h-[46px] rounded-xl bg-[#143D2B] text-[#F8F5EE] dark:bg-[#C59B43] dark:text-[#12110E] text-xs font-medium cursor-pointer"
+          >
+            <BookOpen className="w-4 h-4 shrink-0" aria-hidden="true" />
+            <span className="truncate">
+              جاری رکھیں: {resumeVol.volumeTitle} — {resumeChap.title}
+            </span>
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() =>
+              onOpenReader(
+                book.id,
+                book.volumes[0].id,
+                book.volumes[0].chapters[0].id
+              )
+            }
+            className="w-full flex items-center justify-center gap-2 px-4 min-h-[46px] rounded-xl bg-[#143D2B] text-[#F8F5EE] dark:bg-[#C59B43] dark:text-[#12110E] text-xs font-medium cursor-pointer"
+          >
+            <BookOpen className="w-4 h-4 shrink-0" aria-hidden="true" />
+            <span>جلد اول سے مطالعہ شروع کریں</span>
+          </button>
+        )}
       </section>
 
-      {/* Complete Volumes & Chapters Breakdown */}
-      <section className="space-y-6">
-        <h2 className="font-nastaliq text-2xl font-bold text-[#1C1917] dark:text-[#F5F0E6] leading-loose">
+      {/* Volumes & Chapters List */}
+      <section className="space-y-4">
+        <h2 className="font-nastaliq text-xl font-bold text-[#1C1917] dark:text-[#F5F0E6] px-1">
           فہرستِ جلدیں و ابواب ({book.volumeCount} جلدیں)
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-4">
           {book.volumes.map((vol) => (
             <div
               key={vol.id}
-              className="rounded-2xl bg-white dark:bg-[#1C1A16] border border-[#E2DACB] dark:border-[#2E2A22] p-6 space-y-4"
+              className="rounded-2xl bg-white dark:bg-[#1C1A16] border border-[#E2DACB] dark:border-[#2E2A22] p-4 space-y-3"
             >
-              <div className="flex items-start justify-between gap-4 border-b border-[#EFEAE0] dark:border-[#2A261E] pb-4">
-                <div>
-                  <div className="flex items-center gap-2 text-xs text-[#7A5B2B] dark:text-[#C59B43]">
-                    <span className="font-semibold">{vol.volumeTitle}</span>
-                    <span aria-hidden="true">·</span>
-                    <span className="font-arabic">{vol.arabicVolumeTitle}</span>
+              <div className="flex items-start justify-between gap-3 border-b border-[#EFEAE0] dark:border-[#2A261E] pb-3">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2 text-xs">
+                    <span className="font-semibold text-[#7A5B2B] dark:text-[#C59B43]">
+                      {vol.volumeTitle}
+                    </span>
+                    <span aria-hidden="true" className="text-[#78716C]">·</span>
+                    <span className="font-arabic text-[#78716C] dark:text-[#9E9689]">
+                      {vol.arabicVolumeTitle}
+                    </span>
                   </div>
-                  <p className="mt-1.5 text-sm text-[#57534E] dark:text-[#B8B0A2] leading-7">
+                  <p className="text-xs text-[#57534E] dark:text-[#B8B0A2] leading-6">
                     {vol.scopeSummary}
                   </p>
                 </div>
+
                 <button
                   type="button"
                   onClick={() => onOpenReader(book.id, vol.id, vol.chapters[0].id)}
-                  className="px-3.5 py-2 min-h-[40px] rounded-lg bg-[#EFEAE0] dark:bg-[#24211C] text-[#143D2B] dark:text-[#C59B43] hover:bg-[#E4DEC9] dark:hover:bg-[#302C24] text-xs font-medium whitespace-nowrap shrink-0 cursor-pointer"
+                  className="px-3 py-1.5 min-h-[38px] rounded-lg bg-[#EFEAE0] dark:bg-[#24211C] text-[#143D2B] dark:text-[#C59B43] text-xs font-medium whitespace-nowrap shrink-0 cursor-pointer"
                 >
-                  جلد کھولیں
+                  کھولیں
                 </button>
               </div>
 
@@ -152,24 +148,22 @@ export const BookDetailView: React.FC<BookDetailViewProps> = ({
                     <button
                       type="button"
                       onClick={() => onOpenReader(book.id, vol.id, chap.id)}
-                      className="w-full py-3 text-right flex items-start justify-between gap-3 group cursor-pointer min-h-[44px]"
+                      className="w-full py-2.5 text-right flex items-center justify-between gap-2 cursor-pointer min-h-[44px]"
                     >
-                      <div className="space-y-0.5">
-                        <p className="text-sm font-medium text-[#1C1917] dark:text-[#EDE8DD] group-hover:text-[#143D2B] dark:group-hover:text-[#C59B43] transition-colors">
-                          <span className="text-xs text-[#78716C] dark:text-[#9E9689] ml-2 tabular-nums">
+                      <div className="min-w-0">
+                        <p className="text-xs font-medium text-[#1C1917] dark:text-[#EDE8DD] leading-6">
+                          <span className="text-[#78716C] ml-1.5 tabular-nums">
                             {cIdx + 1}.
                           </span>
                           {chap.title}
                         </p>
                         {chap.arabicHeading && (
-                          <p className="font-arabic text-xs text-[#78716C] dark:text-[#9E9689]">
+                          <p className="font-arabic text-[11px] text-[#78716C] dark:text-[#9E9689] truncate">
                             {chap.arabicHeading}
                           </p>
                         )}
                       </div>
-                      <span className="text-xs text-[#143D2B] dark:text-[#C59B43] opacity-70 group-hover:opacity-100 shrink-0 mt-0.5">
-                        مطالعہ
-                      </span>
+                      <ChevronLeft className="w-4 h-4 text-[#78716C] shrink-0" aria-hidden="true" />
                     </button>
                   </li>
                 ))}

@@ -9,12 +9,12 @@ export const OfflineIndicator: React.FC = () => {
 
   return (
     <div
-      className="fixed bottom-18 md:bottom-4 left-4 z-50 flex items-center gap-2 rounded-lg bg-[#143D2B] dark:bg-[#C59B43] text-[#F8F5EE] dark:text-[#12110E] px-3.5 py-2 text-xs font-medium shadow-lg border border-[#C59B43]/30"
+      className="sticky bottom-16 mx-3 mb-2 z-30 flex items-center justify-center gap-2 rounded-xl bg-[#143D2B] dark:bg-[#C59B43] text-[#F8F5EE] dark:text-[#12110E] px-3 py-2 text-xs font-medium shadow-md"
       role="status"
       aria-live="polite"
     >
       <WifiOff className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
-      <span>آف لائن موڈ — تمام ۳۱ جلدیں مقامی طور پر دستیاب ہیں</span>
+      <span>آف لائن موڈ — تمام ۳۱ جلدیں محفوظ ہیں</span>
     </div>
   );
 };

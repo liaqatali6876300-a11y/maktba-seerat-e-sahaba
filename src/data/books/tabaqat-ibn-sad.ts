@@ -9,6 +9,7 @@ export const tabaqatIbnSadBook: Book = {
   authorFullName: 'امام ابو عبد اللہ محمد بن سعد بن منیع البغدادی رحمہ اللہ (کاتبِ واقدی)',
   authorEra: '۱۶۸ھ – ۲۳۰ھ',
   volumeCount: 8,
+  approxPages: 3000,
   coverImage: '/src/assets/images/book_tabaqat_ibn_sad_1795591729330.jpg',
   accentHex: '#1B365D',
   description:
@@ -21,6 +22,7 @@ export const tabaqatIbnSadBook: Book = {
       volumeNumber: 1,
       volumeTitle: 'جلد اول',
       arabicVolumeTitle: 'الجزء الأول',
+      approxPages: 375,
       scopeSummary: 'ذکرِ انبیاء، نسبِ نبوی ﷺ، ولادت، بعثت، ہجرتِ مدینہ، اخلاق و شمائلِ نبوی ﷺ اور وفودِ عرب',
       chapters: [
         {
@@ -51,6 +53,7 @@ export const tabaqatIbnSadBook: Book = {
       volumeNumber: 2,
       volumeTitle: 'جلد دوم',
       arabicVolumeTitle: 'الجزء الثاني',
+      approxPages: 375,
       scopeSummary: 'مغازیِ نبوی ﷺ (بدر، احد، خندق، خیبر، فتحِ مکہ، حنین، تبوک)، حجۃ الوداع، مرضِ وفات اور فتاویٰ دینے والے صحابہ',
       chapters: [
         {
@@ -78,6 +81,7 @@ export const tabaqatIbnSadBook: Book = {
       volumeNumber: 3,
       volumeTitle: 'جلد سوم',
       arabicVolumeTitle: 'الجزء الثالث',
+      approxPages: 375,
       scopeSummary: 'طبقۂ اولیٰ — غزوۂ بدر میں شریک مہاجرین و انصار صحابہ کرام کے مفصل تراجم',
       chapters: [
         {
@@ -99,6 +103,7 @@ export const tabaqatIbnSadBook: Book = {
       volumeNumber: 4,
       volumeTitle: 'جلد چہارم',
       arabicVolumeTitle: 'الجزء الرابع',
+      approxPages: 375,
       scopeSummary: 'طبقۂ ثانیہ — ہجرتِ حبشہ و مکہ و صلحِ حدیبیہ سے قبل اسلام قبول کرنے والے صحابہ',
       chapters: [
         {
@@ -117,6 +122,7 @@ export const tabaqatIbnSadBook: Book = {
       volumeNumber: 5,
       volumeTitle: 'جلد پنجم',
       arabicVolumeTitle: 'الجزء الخامس',
+      approxPages: 375,
       scopeSummary: 'مدینہ منورہ، مکہ مکرمہ اور طائف کے تابعینِ کبار و فقہائے سبعہ کے حالات',
       chapters: [
         {
@@ -135,6 +141,7 @@ export const tabaqatIbnSadBook: Book = {
       volumeNumber: 6,
       volumeTitle: 'جلد ششم',
       arabicVolumeTitle: 'الجزء السادس',
+      approxPages: 375,
       scopeSummary: 'کوفہ اور بصرہ میں آباد ہونے والے صحابہ و تابعینِ کرام (علقمہ، اسود، مسروق، حسن بصری، محمد بن سیرین)',
       chapters: [
         {
@@ -153,6 +160,7 @@ export const tabaqatIbnSadBook: Book = {
       volumeNumber: 7,
       volumeTitle: 'جلد ہفتم',
       arabicVolumeTitle: 'الجزء السابع',
+      approxPages: 375,
       scopeSummary: 'بصرہ، واسط، بغداد، شام، مصر، یمن اور خراسان کے طبقات و محدثین',
       chapters: [
         {
@@ -171,6 +179,7 @@ export const tabaqatIbnSadBook: Book = {
       volumeNumber: 8,
       volumeTitle: 'جلد ہشتم',
       arabicVolumeTitle: 'الجزء الثامن',
+      approxPages: 375,
       scopeSummary: 'کتاب النساء — ازواجِ مطہرات، بناتِ طاہرات، قریشی و انصاری صحابیات اور تابعیات',
       chapters: [
         {

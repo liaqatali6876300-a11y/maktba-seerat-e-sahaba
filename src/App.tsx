@@ -2,18 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { BookOpen, Library, Search, Bookmark, Moon, Sun } from 'lucide-react';
 import { LIBRARY_BOOKS } from './data/books';
 import type {
+  AttachedVolumeFile,
+  AttachedVolumeMeta,
   BookmarkItem,
   ReaderSettings,
   ReadingProgress,
 } from './types/library';
 import {
   loadAllProgress,
+  loadAllVolumeFileMeta,
   loadBookmarks,
   loadReaderSettings,
+  loadVolumeFile,
   removeBookmark,
+  removeVolumeFile,
   saveBookmark,
   saveProgress,
   saveReaderSettings,
+  saveVolumeFile,
 } from './utils/offlineStorage';
 import { PWAInstallButton } from './components/PWAInstallButton';
 import { OfflineIndicator } from './components/OfflineIndicator';
@@ -21,6 +27,7 @@ import { LibraryHome } from './components/LibraryHome';
 import { VolumesIndexView } from './components/VolumesIndexView';
 import { BookDetailView } from './components/BookDetailView';
 import { ReaderView } from './components/ReaderView';
+import { FullVolumeViewer } from './components/FullVolumeViewer';
 import { SearchView } from './components/SearchView';
 import { BookmarksView } from './components/BookmarksView';
 
@@ -29,6 +36,7 @@ type AppView =
   | { type: 'volumes' }
   | { type: 'book'; bookId: string }
   | { type: 'reader'; bookId: string; volumeId: string; chapterId: string }
+  | { type: 'full-volume'; bookId: string; volumeId: string; file: AttachedVolumeFile }
   | { type: 'search' }
   | { type: 'bookmarks' };
 
@@ -36,6 +44,7 @@ export default function App() {
   const [view, setView] = useState<AppView>({ type: 'home' });
   const [bookmarks, setBookmarks] = useState<BookmarkItem[]>([]);
   const [progressMap, setProgressMap] = useState<Record<string, ReadingProgress>>({});
+  const [volumeFileMeta, setVolumeFileMeta] = useState<Record<string, AttachedVolumeMeta>>({});
   const [readerSettings, setReaderSettings] = useState<ReaderSettings>({
     script: 'nastaliq',
     fontSize: 19,
@@ -47,6 +56,7 @@ export default function App() {
     void loadBookmarks().then(setBookmarks);
     void loadAllProgress().then(setProgressMap);
     void loadReaderSettings().then(setReaderSettings);
+    void loadAllVolumeFileMeta().then(setVolumeFileMeta);
 
     const savedDark = localStorage.getItem('maktaba_dark') === 'true';
     setIsDark(savedDark);
@@ -80,6 +90,64 @@ export default function App() {
     void saveProgress(nextProgress);
   };
 
+  const handleAttachVolumeFile = async (
+    bookId: string,
+    volumeId: string,
+    file: File
+  ) => {
+    const isPdf =
+      file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+    const fileType: 'pdf' | 'txt' = isPdf ? 'pdf' : 'txt';
+    const textContent = fileType === 'txt' ? await file.text() : undefined;
+
+    const record: AttachedVolumeFile = {
+      volumeId,
+      bookId,
+      fileName: file.name,
+      fileType,
+      fileSize: file.size,
+      addedAt: Date.now(),
+      blob: fileType === 'pdf' ? file : undefined,
+      textContent,
+    };
+
+    await saveVolumeFile(record);
+    setVolumeFileMeta((prev) => ({
+      ...prev,
+      [volumeId]: {
+        volumeId: record.volumeId,
+        bookId: record.bookId,
+        fileName: record.fileName,
+        fileType: record.fileType,
+        fileSize: record.fileSize,
+        addedAt: record.addedAt,
+      },
+    }));
+
+    setView({ type: 'full-volume', bookId, volumeId, file: record });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleOpenAttachedVolume = async (bookId: string, volumeId: string) => {
+    const file = await loadVolumeFile(volumeId);
+    if (file) {
+      setView({ type: 'full-volume', bookId, volumeId, file });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleRemoveVolumeFile = async (volumeId: string) => {
+    await removeVolumeFile(volumeId);
+    setVolumeFileMeta((prev) => {
+      const next = { ...prev };
+      delete next[volumeId];
+      return next;
+    });
+    if (view.type === 'full-volume' && view.volumeId === volumeId) {
+      setView({ type: 'book', bookId: view.bookId });
+    }
+  };
+
   const handleUpdateSettings = (next: ReaderSettings) => {
     setReaderSettings(next);
     void saveReaderSettings(next);
@@ -110,18 +178,24 @@ export default function App() {
   };
 
   const activeBook =
-    view.type === 'book' || view.type === 'reader'
+    view.type === 'book' || view.type === 'reader' || view.type === 'full-volume'
       ? LIBRARY_BOOKS.find((b) => b.id === view.bookId) ?? LIBRARY_BOOKS[0]
       : LIBRARY_BOOKS[0];
 
+  const activeVolume =
+    view.type === 'full-volume'
+      ? activeBook.volumes.find((v) => v.id === view.volumeId) ?? activeBook.volumes[0]
+      : activeBook.volumes[0];
+
   const isNavActive = (tab: 'home' | 'volumes' | 'search' | 'bookmarks') => {
-    if (tab === 'home') return view.type === 'home' || view.type === 'book';
+    if (tab === 'home')
+      return view.type === 'home' || view.type === 'book' || view.type === 'full-volume';
     return view.type === tab;
   };
 
   return (
     <div className="min-h-screen bg-[#EAE3D3] dark:bg-[#0B0A08] sm:py-4 flex justify-center">
-      {/* Mobile Screen Display Shell (full-bleed on phones, 430px mobile screen on wider displays) */}
+      {/* Mobile Screen Display Shell */}
       <div className="w-full sm:max-w-[430px] min-h-screen sm:min-h-[calc(100vh-2rem)] sm:rounded-[30px] sm:border sm:border-[#D6CEBE] dark:sm:border-[#2E2A22] sm:shadow-2xl bg-[#F8F5EE] text-[#1C1917] dark:bg-[#12110E] dark:text-[#EDE8DD] flex flex-col relative overflow-x-clip transition-colors">
         {/* Compact Mobile Top App Bar (56px) */}
         <header className="sticky top-0 z-40 h-14 px-4 bg-[#F8F5EE]/95 dark:bg-[#12110E]/95 backdrop-blur-md border-b border-[#E0D9CA] dark:border-[#2C2820] flex items-center justify-between gap-3 sm:rounded-t-[30px]">
@@ -171,11 +245,14 @@ export default function App() {
           {view.type === 'volumes' && (
             <VolumesIndexView
               books={LIBRARY_BOOKS}
+              volumeFileMeta={volumeFileMeta}
               onOpenReader={handleOpenReader}
               onSelectBook={(bookId) => {
                 setView({ type: 'book', bookId });
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
+              onAttachVolumeFile={handleAttachVolumeFile}
+              onOpenAttachedVolume={handleOpenAttachedVolume}
             />
           )}
 
@@ -183,8 +260,11 @@ export default function App() {
             <BookDetailView
               book={activeBook}
               progress={progressMap[activeBook.id]}
+              volumeFileMeta={volumeFileMeta}
               onBack={() => setView({ type: 'home' })}
               onOpenReader={handleOpenReader}
+              onAttachVolumeFile={handleAttachVolumeFile}
+              onOpenAttachedVolume={handleOpenAttachedVolume}
             />
           )}
 
@@ -200,6 +280,17 @@ export default function App() {
               onToggleBookmark={handleToggleBookmark}
               onSaveNote={handleSaveNote}
               onBackToBook={() => setView({ type: 'book', bookId: activeBook.id })}
+            />
+          )}
+
+          {view.type === 'full-volume' && (
+            <FullVolumeViewer
+              book={activeBook}
+              volume={activeVolume}
+              file={view.file}
+              settings={readerSettings}
+              onBack={() => setView({ type: 'book', bookId: activeBook.id })}
+              onRemoveFile={handleRemoveVolumeFile}
             />
           )}
 

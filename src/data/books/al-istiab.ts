@@ -9,6 +9,7 @@ export const alIstiabBook: Book = {
   authorFullName: 'امام حافظ ابو عمر یوسف بن عبد اللہ بن عبد البر النمری القرطبی رحمہ اللہ',
   authorEra: '۳۶۸ھ – ۴۶۳ھ',
   volumeCount: 4,
+  approxPages: 1500,
   coverImage: '/src/assets/images/book_al_istiab_1795591730298.jpg',
   accentHex: '#334155',
   description:
@@ -21,6 +22,7 @@ export const alIstiabBook: Book = {
       volumeNumber: 1,
       volumeTitle: 'جلد اول',
       arabicVolumeTitle: 'الجزء الأول',
+      approxPages: 375,
       scopeSummary: 'مقدمۂ امام ابن عبد البر، فضائلِ صحابہ، سیرتِ طیبہ کا اجمال اور حرفِ الف تا حرفِ جیم',
       chapters: [
         {
@@ -51,6 +53,7 @@ export const alIstiabBook: Book = {
       volumeNumber: 2,
       volumeTitle: 'جلد دوم',
       arabicVolumeTitle: 'الجزء الثاني',
+      approxPages: 375,
       scopeSummary: 'حرفِ حاء تا حرفِ ضاد (حسان بن ثابت، حسن و حسین رضی اللہ عنہما، زید بن حارثہ، زید بن ثابت، سعید بن زید)',
       chapters: [
         {
@@ -81,6 +84,7 @@ export const alIstiabBook: Book = {
       volumeNumber: 3,
       volumeTitle: 'جلد سوم',
       arabicVolumeTitle: 'الجزء الثالث',
+      approxPages: 375,
       scopeSummary: 'حرفِ طاء تا حرفِ میم (عبادلہ، عبد اللہ بن سلام، عثمان بن مظعون، عکرمہ بن ابی جہل، معقل بن یسار)',
       chapters: [
         {
@@ -108,6 +112,7 @@ export const alIstiabBook: Book = {
       volumeNumber: 4,
       volumeTitle: 'جلد چہارم',
       arabicVolumeTitle: 'الجزء الرابع',
+      approxPages: 375,
       scopeSummary: 'حرفِ نون تا یاء، بابِ کنیتیں اور کتاب النساء (صحابیاتِ کرام کے حالاتِ زندگی)',
       chapters: [
         {

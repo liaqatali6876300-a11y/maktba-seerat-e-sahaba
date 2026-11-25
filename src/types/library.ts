@@ -13,6 +13,7 @@ export interface BookVolume {
   volumeNumber: number;
   volumeTitle: string;
   arabicVolumeTitle: string;
+  approxPages: number;
   scopeSummary: string;
   chapters: ChapterSection[];
 }
@@ -26,6 +27,7 @@ export interface Book {
   authorFullName: string;
   authorEra: string;
   volumeCount: number;
+  approxPages: number;
   coverImage: string;
   accentHex: string;
   description: string;
@@ -50,6 +52,20 @@ export interface ReadingProgress {
   volumeId: string;
   chapterId: string;
   updatedAt: number;
+}
+
+export interface AttachedVolumeMeta {
+  volumeId: string;
+  bookId: string;
+  fileName: string;
+  fileType: 'pdf' | 'txt';
+  fileSize: number;
+  addedAt: number;
+}
+
+export interface AttachedVolumeFile extends AttachedVolumeMeta {
+  blob?: Blob;
+  textContent?: string;
 }
 
 export type ScriptFont = 'nastaliq' | 'naskh';

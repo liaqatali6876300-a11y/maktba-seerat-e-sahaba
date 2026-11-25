@@ -1,14 +1,21 @@
-import type { BookmarkItem, ReaderSettings, ReadingProgress } from '../types/library';
+import type {
+  AttachedVolumeFile,
+  AttachedVolumeMeta,
+  BookmarkItem,
+  ReaderSettings,
+  ReadingProgress,
+} from '../types/library';
 
 const DB_NAME = 'MaktabaSeeratOfflineDB';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 const STORE_BOOKMARKS = 'bookmarks';
 const STORE_PROGRESS = 'progress';
 const STORE_SETTINGS = 'settings';
+const STORE_VOLUME_FILES = 'volume_files';
 
 const DEFAULT_SETTINGS: ReaderSettings = {
   script: 'nastaliq',
-  fontSize: 20,
+  fontSize: 19,
   readerTheme: 'parchment',
 };
 
@@ -29,6 +36,9 @@ function openDatabase(): Promise<IDBDatabase> {
       }
       if (!db.objectStoreNames.contains(STORE_SETTINGS)) {
         db.createObjectStore(STORE_SETTINGS, { keyPath: 'key' });
+      }
+      if (!db.objectStoreNames.contains(STORE_VOLUME_FILES)) {
+        db.createObjectStore(STORE_VOLUME_FILES, { keyPath: 'volumeId' });
       }
     };
     request.onsuccess = () => resolve(request.result);
@@ -155,4 +165,65 @@ export async function saveReaderSettings(settings: ReaderSettings): Promise<void
   } catch {
     localStorage.setItem('maktaba_settings', JSON.stringify(settings));
   }
+}
+
+export async function saveVolumeFile(file: AttachedVolumeFile): Promise<void> {
+  const db = await openDatabase();
+  await new Promise<void>((resolve, reject) => {
+    const tx = db.transaction(STORE_VOLUME_FILES, 'readwrite');
+    tx.objectStore(STORE_VOLUME_FILES).put(file);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+export async function loadVolumeFile(volumeId: string): Promise<AttachedVolumeFile | null> {
+  try {
+    const db = await openDatabase();
+    return await new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE_VOLUME_FILES, 'readonly');
+      const req = tx.objectStore(STORE_VOLUME_FILES).get(volumeId);
+      req.onsuccess = () => resolve((req.result as AttachedVolumeFile) ?? null);
+      req.onerror = () => reject(req.error);
+    });
+  } catch {
+    return null;
+  }
+}
+
+export async function loadAllVolumeFileMeta(): Promise<Record<string, AttachedVolumeMeta>> {
+  try {
+    const db = await openDatabase();
+    return await new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE_VOLUME_FILES, 'readonly');
+      const req = tx.objectStore(STORE_VOLUME_FILES).getAll();
+      req.onsuccess = () => {
+        const map: Record<string, AttachedVolumeMeta> = {};
+        for (const item of req.result as AttachedVolumeFile[]) {
+          map[item.volumeId] = {
+            volumeId: item.volumeId,
+            bookId: item.bookId,
+            fileName: item.fileName,
+            fileType: item.fileType,
+            fileSize: item.fileSize,
+            addedAt: item.addedAt,
+          };
+        }
+        resolve(map);
+      };
+      req.onerror = () => reject(req.error);
+    });
+  } catch {
+    return {};
+  }
+}
+
+export async function removeVolumeFile(volumeId: string): Promise<void> {
+  const db = await openDatabase();
+  await new Promise<void>((resolve, reject) => {
+    const tx = db.transaction(STORE_VOLUME_FILES, 'readwrite');
+    tx.objectStore(STORE_VOLUME_FILES).delete(volumeId);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
 }

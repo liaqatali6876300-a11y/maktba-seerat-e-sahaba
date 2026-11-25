@@ -19,3 +19,5 @@ export const TOTAL_CHAPTERS_COUNT = LIBRARY_BOOKS.reduce(
   (acc, b) => acc + b.volumes.reduce((vAcc, v) => vAcc + v.chapters.length, 0),
   0
 );
+
+export const TOTAL_APPROX_PAGES = LIBRARY_BOOKS.reduce((acc, b) => acc + b.approxPages, 0);

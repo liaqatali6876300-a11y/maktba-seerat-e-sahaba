@@ -9,6 +9,7 @@ export const seeratIbnHishamBook: Book = {
   authorFullName: 'امام ابو محمد عبد الملک بن ہشام الحمیری المعافری رحمہ اللہ',
   authorEra: 'وفات ۲۱۸ھ / ۲۱۳ھ',
   volumeCount: 4,
+  approxPages: 1000,
   coverImage: '/src/assets/images/book_seerat_ibn_hisham_1795591729775.jpg',
   accentHex: '#8C5315',
   description:
@@ -21,6 +22,7 @@ export const seeratIbnHishamBook: Book = {
       volumeNumber: 1,
       volumeTitle: 'جلد اول',
       arabicVolumeTitle: 'الجزء الأول',
+      approxPages: 250,
       scopeSummary: 'نسبِ نبوی ﷺ، اصحابِ فیل، ولادتِ باسعادت، رضاعت، حلف الفضول، نکاحِ خدیجہ، نزولِ وحی اور مکی دعوت',
       chapters: [
         {
@@ -52,6 +54,7 @@ export const seeratIbnHishamBook: Book = {
       volumeNumber: 2,
       volumeTitle: 'جلد دوم',
       arabicVolumeTitle: 'الجزء الثاني',
+      approxPages: 250,
       scopeSummary: 'ہجرتِ حبشہ، شعبِ ابی طالب، عام الحزن، سفرِ طائف، معراج النبی ﷺ، بیعتِ عقبہ اور ہجرتِ مدینہ',
       chapters: [
         {
@@ -82,6 +85,7 @@ export const seeratIbnHishamBook: Book = {
       volumeNumber: 3,
       volumeTitle: 'جلد سوم',
       arabicVolumeTitle: 'الجزء الثالث',
+      approxPages: 250,
       scopeSummary: 'غزوۂ بدرِ کبریٰ، غزوۂ احد، غزوۂ احزاب (خندق)، غزوۂ بنی مصطلق اور صلحِ حدیبیہ',
       chapters: [
         {
@@ -109,6 +113,7 @@ export const seeratIbnHishamBook: Book = {
       volumeNumber: 4,
       volumeTitle: 'جلد چہارم',
       arabicVolumeTitle: 'الجزء الرابع',
+      approxPages: 250,
       scopeSummary: 'فتحِ خیبر، غزوۂ موتہ، فتحِ مکہ، غزوۂ حنین، غزوۂ تبوک، عام الوفود، حجۃ الوداع اور وصالِ نبوی ﷺ',
       chapters: [
         {

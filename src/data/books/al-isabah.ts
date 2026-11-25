@@ -9,6 +9,7 @@ export const alIsabahBook: Book = {
   authorFullName: 'شیخ الاسلام حافظ شہاب الدین احمد بن علی ابن حجر عسقلانی رحمہ اللہ',
   authorEra: '۷۷۳ھ – ۸۵۲ھ',
   volumeCount: 8,
+  approxPages: 4000,
   coverImage: '/src/assets/images/book_al_isabah_1795591728493.jpg',
   accentHex: '#7A2021',
   description:
@@ -21,6 +22,7 @@ export const alIsabahBook: Book = {
       volumeNumber: 1,
       volumeTitle: 'جلد اول',
       arabicVolumeTitle: 'الجزء الأول',
+      approxPages: 500,
       scopeSummary: 'مقدمۂ کتاب، تعریفِ صحابی، طرقِ ثبوتِ صحابیت اور حرفِ الف تا ث کے تراجم',
       chapters: [
         {
@@ -67,6 +69,7 @@ export const alIsabahBook: Book = {
       volumeNumber: 2,
       volumeTitle: 'جلد دوم',
       arabicVolumeTitle: 'الجزء الثاني',
+      approxPages: 500,
       scopeSummary: 'حرفِ جیم تا حرفِ زاء (حضرت جعفر طیار، جابر بن عبد اللہ، حسان بن ثابت، خالد بن ولید، زبیر بن عوام)',
       chapters: [
         {
@@ -109,6 +112,7 @@ export const alIsabahBook: Book = {
       volumeNumber: 3,
       volumeTitle: 'جلد سوم',
       arabicVolumeTitle: 'الجزء الثالث',
+      approxPages: 500,
       scopeSummary: 'حرفِ سین تا حرفِ ظاء (حضرت سعد بن ابی وقاص، سعید بن زید، سلمان فارسی، سہیل بن عمرو، طلحہ بن عبید اللہ)',
       chapters: [
         {
@@ -149,6 +153,7 @@ export const alIsabahBook: Book = {
       volumeNumber: 4,
       volumeTitle: 'جلد چہارم',
       arabicVolumeTitle: 'الجزء الرابع',
+      approxPages: 500,
       scopeSummary: 'حرفِ عین تا حرفِ قاف (خلفاء و عبادلہ: حضرت علی المرتضیٰ، عثمان ذوالنورین، عمر فاروق، عبد اللہ بن مسعود، عبد اللہ بن عباس)',
       chapters: [
         {
@@ -199,6 +204,7 @@ export const alIsabahBook: Book = {
       volumeNumber: 5,
       volumeTitle: 'جلد پنجم',
       arabicVolumeTitle: 'الجزء الخامس',
+      approxPages: 500,
       scopeSummary: 'حرفِ کاف، لام اور میم کے تراجم (حضرت کعب بن مالک، معاذ بن جبل، مصعب بن عمیر، مقداد بن اسود)',
       chapters: [
         {
@@ -237,6 +243,7 @@ export const alIsabahBook: Book = {
       volumeNumber: 6,
       volumeTitle: 'جلد ششم',
       arabicVolumeTitle: 'الجزء السادس',
+      approxPages: 500,
       scopeSummary: 'حرفِ نون، ہاء، واو، یاء اور کنیتوں کا باب (ابو ایوب انصاری، ابو ذر غفاری، ابو عبیدہ بن الجراح، ابو ہریرہ)',
       chapters: [
         {
@@ -275,6 +282,7 @@ export const alIsabahBook: Book = {
       volumeNumber: 7,
       volumeTitle: 'جلد ہفتم',
       arabicVolumeTitle: 'الجزء السابع',
+      approxPages: 500,
       scopeSummary: 'بقیہ کنیتیں، منسوبین، مبہمات اور قسمِ رابع (مخضرمینِ کرام: اویس قرنی، احنف بن قیس، نجاشی شاہِ حبشہ)',
       chapters: [
         {
@@ -305,6 +313,7 @@ export const alIsabahBook: Book = {
       volumeNumber: 8,
       volumeTitle: 'جلد ہشتم',
       arabicVolumeTitle: 'الجزء الثامن',
+      approxPages: 500,
       scopeSummary: 'کتاب النساء — امہات المؤمنین، بناتِ رسول ﷺ اور جلیل القدر صحابیاتِ کرام رضی اللہ عنہن',
       chapters: [
         {

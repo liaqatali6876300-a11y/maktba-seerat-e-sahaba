@@ -1,7 +1,7 @@
 import React from 'react';
 import { BookOpen, ChevronLeft, Library } from 'lucide-react';
 import type { Book, ReadingProgress } from '../types/library';
-import { TOTAL_CHAPTERS_COUNT, TOTAL_VOLUMES_COUNT } from '../data/books';
+import { TOTAL_APPROX_PAGES, TOTAL_VOLUMES_COUNT } from '../data/books';
 import { BookCoverImage } from './BookCoverImage';
 
 interface LibraryHomeProps {
@@ -37,7 +37,7 @@ export const LibraryHome: React.FC<LibraryHomeProps> = ({
             پانچ عظیم مصنفین — مکمل ۳۱ جلدیں
           </h1>
           <p className="text-xs text-[#57534E] dark:text-[#B8B0A2] leading-6">
-            فصیح اردو اسلوب اور خوبصورت نستعلیق خط میں مکمل آف لائن مطالعہ۔
+            فصیح اردو اسلوب اور خوبصورت نستعلیق خط میں منتخب ابواب + مکمل ۱۲,۰۰۰ صفحات کی پی ڈی ایف/ٹیکسٹ جلدیں آف لائن محفوظ کرنے کی سہولت۔
           </p>
         </div>
 
@@ -55,9 +55,9 @@ export const LibraryHome: React.FC<LibraryHomeProps> = ({
           </div>
           <div>
             <p className="text-base font-bold tabular-nums text-[#1C1917] dark:text-[#F5F0E6]">
-              {TOTAL_CHAPTERS_COUNT}
+              {TOTAL_APPROX_PAGES.toLocaleString('ur-PK')}+
             </p>
-            <p className="text-[10px] text-[#78716C] dark:text-[#9E9689]">ابواب</p>
+            <p className="text-[10px] text-[#78716C] dark:text-[#9E9689]">مطبوعہ صفحات</p>
           </div>
           <div>
             <p className="text-base font-bold text-[#143D2B] dark:text-[#C59B43]">۱۰۰٪</p>
@@ -97,7 +97,7 @@ export const LibraryHome: React.FC<LibraryHomeProps> = ({
             className="w-full flex items-center justify-center gap-2 px-4 min-h-[44px] rounded-xl border border-[#D6CEBE] dark:border-[#332E24] bg-white/80 dark:bg-[#12110E]/60 text-[#1C1917] dark:text-[#EDE8DD] text-xs font-medium transition-colors cursor-pointer"
           >
             <Library className="w-4 h-4 shrink-0" aria-hidden="true" />
-            <span>تمام ۳۱ جلدوں کی فہرست دیکھیں</span>
+            <span>تمام ۳۱ جلدیں اور مکمل کتب منسلک کریں</span>
           </button>
         </div>
       </section>
@@ -109,7 +109,7 @@ export const LibraryHome: React.FC<LibraryHomeProps> = ({
             امہات الکتب (۵ کتابیں)
           </h2>
           <span className="text-xs text-[#78716C] dark:text-[#9E9689] tabular-nums">
-            کل ۳۱ جلدیں
+            کل ۳۱ جلدیں · ۱۲,۰۰۰+ صفحات
           </span>
         </div>
 
@@ -161,8 +161,8 @@ export const LibraryHome: React.FC<LibraryHomeProps> = ({
                     <div className="pt-2 flex items-center justify-between text-[11px] font-medium text-[#143D2B] dark:text-[#C59B43]">
                       <span className="tabular-nums">
                         {activeVol
-                          ? `${book.volumeCount} جلدیں · گزشتہ: ${activeVol.volumeTitle}`
-                          : `${book.volumeCount} مکمل جلدیں · ${book.authorEra}`}
+                          ? `${book.volumeCount} جلدیں · ~${book.approxPages.toLocaleString('ur-PK')} صفحات · ${activeVol.volumeTitle}`
+                          : `${book.volumeCount} جلدیں · ~${book.approxPages.toLocaleString('ur-PK')} صفحات`}
                       </span>
                       <ChevronLeft className="w-4 h-4 shrink-0" aria-hidden="true" />
                     </div>

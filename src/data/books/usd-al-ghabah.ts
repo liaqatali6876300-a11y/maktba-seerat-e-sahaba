@@ -9,6 +9,7 @@ export const usdAlGhabahBook: Book = {
   authorFullName: 'امام عز الدین ابو الحسن علی بن محمد ابن اثیر جزری رحمہ اللہ',
   authorEra: '۵۵۵ھ – ۶۳۰ھ',
   volumeCount: 7,
+  approxPages: 2500,
   coverImage: '/src/assets/images/book_usd_al_ghabah_1795591728884.jpg',
   accentHex: '#144D36',
   description:
@@ -21,6 +22,7 @@ export const usdAlGhabahBook: Book = {
       volumeNumber: 1,
       volumeTitle: 'جلد اول',
       arabicVolumeTitle: 'الجزء الأول',
+      approxPages: 360,
       scopeSummary: 'خطبۂ کتاب، سیرتِ نبوی ﷺ کا اجمالی بیان اور حرفِ الف و باء کے تراجم',
       chapters: [
         {
@@ -60,6 +62,7 @@ export const usdAlGhabahBook: Book = {
       volumeNumber: 2,
       volumeTitle: 'جلد دوم',
       arabicVolumeTitle: 'الجزء الثاني',
+      approxPages: 360,
       scopeSummary: 'حرفِ تاء تا حرفِ زاء (حضرت تمیم داری، ثابت بن قیس، حاطب بن ابی بلتعہ، حذیفہ بن الیمان، حمزہ سید الشہداء)',
       chapters: [
         {
@@ -90,6 +93,7 @@ export const usdAlGhabahBook: Book = {
       volumeNumber: 3,
       volumeTitle: 'جلد سوم',
       arabicVolumeTitle: 'الجزء الثالث',
+      approxPages: 360,
       scopeSummary: 'حرفِ سین تا حرفِ ظاء (حضرت سعد بن معاذ، سعید بن عامر، صہیب رومی، ضحاک بن سفیان)',
       chapters: [
         {
@@ -120,6 +124,7 @@ export const usdAlGhabahBook: Book = {
       volumeNumber: 4,
       volumeTitle: 'جلد چہارم',
       arabicVolumeTitle: 'الجزء الرابع',
+      approxPages: 360,
       scopeSummary: 'حرفِ عین تا حرفِ قاف (حضرت عبد الرحمن بن عوف، عبد اللہ بن عمر، عبد اللہ بن زبیر، عمار بن یاسر، عمرو بن العاص)',
       chapters: [
         {
@@ -147,6 +152,7 @@ export const usdAlGhabahBook: Book = {
       volumeNumber: 5,
       volumeTitle: 'جلد پنجم',
       arabicVolumeTitle: 'الجزء الخامس',
+      approxPages: 360,
       scopeSummary: 'حرفِ کاف، لام اور میم (حضرت کعب بن اشرف کے قاتل محمد بن مسلمہ، معاویہ بن ابی سفیان، مغیرہ بن شعبہ)',
       chapters: [
         {
@@ -174,6 +180,7 @@ export const usdAlGhabahBook: Book = {
       volumeNumber: 6,
       volumeTitle: 'جلد ششم',
       arabicVolumeTitle: 'الجزء السادس',
+      approxPages: 350,
       scopeSummary: 'حرفِ نون تا یاء اور بابِ کنیتیں (حضرت نعمان بن مقرن، وحشی بن حرب، ابو ذر غفاری، ابو موسیٰ اشعری)',
       chapters: [
         {
@@ -203,6 +210,7 @@ export const usdAlGhabahBook: Book = {
       volumeNumber: 7,
       volumeTitle: 'جلد ہفتم',
       arabicVolumeTitle: 'الجزء السابع',
+      approxPages: 350,
       scopeSummary: 'کتاب النساء — امہات المؤمنین اور صحابیاتِ کرام رضی اللہ عنہن کے مستند تذکرے',
       chapters: [
         {
